@@ -12,15 +12,17 @@ def months4house():
     # Given Variables
     portion_down_payment = 0.25
     current_savings = 0.0
+    r = 0.04  # investment returns
+    r_montly = ((1+r)**(1/12))-1
     # output variables
     nb_months = 0
-    r = 0.04  # investment returns
     # Start of Program 
     while current_savings < total_cost*portion_down_payment:
-        if nb_months % 12 == 0:
-            current_savings = current_savings + current_savings*r
-        current_savings += portion_saved*(annual_salary/12)
         nb_months += 1 
+        '''if nb_months % 12 == 0:
+            current_savings += current_savings*r'''
+        current_savings += current_savings*r_montly
+        current_savings += portion_saved*(annual_salary/12)
     print(f"Number of months : {nb_months}")
 
 
