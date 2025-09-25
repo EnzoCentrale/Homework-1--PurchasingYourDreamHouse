@@ -22,7 +22,7 @@ def Calculate_savings(annual_salary: float, saving_rate: float, semi_annual_rais
 
 def Bisection_search(t: tuple, count: int, annual_salary: float, semi_annual_raise: float, r: float):  # type: ignore
     saving_rate: float = (t[0]+t[1]) / 2  # type: ignore #type : ignore
-    if abs(1000000 - Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r)) < 100:  # type: ignore
+    if abs(Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) - 1000000) < 100:  # type: ignore
         return saving_rate, count+1  # type: ignore
     if Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) > 1000000: # type: ignore
         return Bisection_search((t[0], saving_rate), count + 1, annual_salary, semi_annual_raise, r) # type: ignore
