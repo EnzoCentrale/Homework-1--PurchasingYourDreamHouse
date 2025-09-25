@@ -1,0 +1,53 @@
+'''
+Owner: Enzo Ducros
+Date: 2024-09-15
+Homework 1 : Dream House in Lyon
+Part III : Bisection search to find the right savings rate'''
+
+# For this part i will need to remake the function from part 2 to be able to calculate the total savings from an certain saving rate
+
+
+def Calculate_savings(annual_salary: float, saving_rate: float, semi_annual_raise: float, r: float):  # 4 parameters
+    current_savings = 0.0
+    r_montly: float = ((1+r)**(1/12))-1
+    for nb_months in range(36):
+        if nb_months % 6 == 0:
+            annual_salary += annual_salary*semi_annual_raise
+        current_savings += current_savings*r_montly
+        current_savings += saving_rate*(annual_salary/12)
+    return current_savings
+
+# Now i need to perform the bisection search to see the best savings rate for buying a house
+
+
+def Bisection_search(t: tuple, count: int, annual_salary: float, semi_annual_raise: float, r: float):  # type: ignore
+    saving_rate: float = (t[0]+t[1]) / 2  # type: ignore #type : ignore
+    if abs(Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) - 1000000) < 100:  # type: ignore
+        return saving_rate, count+1  # type: ignore
+    if Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) > 1000000:
+        return Bisection_search((t[0], saving_rate), count + 1, annual_salary, semi_annual_raise, r)
+    if Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) < 1000000:
+        return Bisection_search((saving_rate, t[1]), count + 1, annual_salary, semi_annual_raise, r)
+
+# Now i do the final function with all the user inputs
+
+
+def PartIII():
+    # Given inputs :
+    semi_annual_raise: float = 0.07
+    r: float = 0.04
+    # User inputs
+    Salary: float = float(input("Enter the starting salary in Lyon : "))
+    # Checks if salary is big enough:
+    if Calculate_savings(Salary, 1.0, semi_annual_raise, r) < 1000000:
+        print("Sorry , you do not have the minimum salary required to save up in 3 years ")
+        return
+    saving_rate, count = Bisection_search(
+        (0, 1), 0, Salary, semi_annual_raise, r)
+    print(f"Best saving rate : {saving_rate}")
+    print(f"Steps in bisection Search : {count}")
+
+
+if __name__ == "__main__":
+    # Calculate_savings(50000, 0.10, 0.07, 0.4)
+    PartIII()
