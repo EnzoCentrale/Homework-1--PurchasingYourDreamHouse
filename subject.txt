@@ -1,0 +1,99 @@
+Introduction
+You have recently moved to the Lyon metropolitan area, known for its rich culture,
+amazing attractions and beautiful landscapes. You’ve decided to purchase your dream
+house and settle in Lyon. However, you are well aware that real estate prices in Lyon
+can be quite high. This problem set will help you calculate how long it will take to
+save enough money for a down payment on a house in Lyon, taking into account various
+financial factors.
+2 Part I: Calculating Time to Save
+In this part, you will calculate the number of months it will take you to save enough
+money to secure the down-payment on your dream home in Lyon. Consider the following
+assumptions:
+1. The cost of your dream home in Lyon is represented as total cost.
+2. The portion of the cost needed for a down payment is portion down payment,
+which is 25% (0.25).
+3. You currently have saved an initial amount, current savings, which starts at €0.
+4. Your wise investments yield an annual return of r, which is 4% (0.04).
+5. Your annual salary in Lyon is annual salary.
+6. You plan to dedicate a certain percentage of your monthly salary for savings, rep-
+resented as portion saved. This value should be in decimal form (e.g., 0.1 for
+10%).
+1
+7. At the end of each month, your savings will be increased by the return on your
+investments plus a percentage of your monthly salary (annual salary / 12).
+Write a program in Python to calculate the number of months required to save for a
+down payment. Ensure that your main variables are represented as floats.
+Your program should prompt the user to enter the following variables:
+1. The starting annual salary in Lyon (annual salary).
+2. The portion of salary to be saved each month, in decimal form (portion saved).
+3. The cost of your dream home in Lyon (total cost).
+Include appropriate comments in your code for the sake of clarity.
+Test case 1
+Enter your annual salary in Lyon: 60000
+Enter the portion of salary to be saved, as a decimal: 0.10
+Enter the cost of your dream home in Lyon: 400000
+Number of months: 87
+Test case 2
+Enter your annual salary in Lyon: 75000
+Enter the portion of salary to be saved, as a decimal: 0.15
+Enter the cost of your dream home in Lyon: 600000
+Number of months: 106
+3 Part II: Salary Raise
+Based on your solution from Part I, you will now take into account semi-annual salary
+raises. Your program should include these additional steps:
+1. Ask the user to input a semi-annual salary raise as semi annual raise, represented
+as a decimal percentage.
+2. Starting from the 6th month, increase your salary by that percentage. Apply the
+same raise every 6 months.
+Modify your existing program to calculate the number of months required to save for a
+down payment while considering the semi-annual salary raise. Assume that your invest-
+ments still earn a return of 4%, and the required down payment percentage is 25%.
+Your program should prompt the user to enter the following variables:
+1. The starting annual salary in Lyon (annual salary).
+2. The portion of salary to be saved each month, in decimal form (portion saved).
+3. The cost of your dream home in Lyon (total cost).
+4. The semi-annual salary raise, in decimal form (semi annual raise).
+Ensure that your code maintains the format shown in the test cases provided.
+2
+Test case 1
+Enter your starting annual salary in Lyon: 65000
+Enter the portion of salary to be saved, as a decimal: 0.12
+Enter the cost of your dream home in Lyon: 500000
+Enter the semi-annual raise, as a decimal: 0.04
+Number of months: 105
+Test case 2
+Enter your starting annual salary in Lyon: 80000
+Enter the portion of salary to be saved, as a decimal: 0.10
+Enter the cost of your dream home in Lyon: 750000
+Enter the semi-annual raise, as a decimal: 0.05
+Number of months: 142
+4 Part III: Finding the Right Savings Rate
+In this part, you will determine the best savings rate required to afford a down payment on
+a €1 million house in Lyon within 36 months. You will use bisection search to efficiently
+calculate this rate. Assume the following:
+1. Your semi-annual raise in Lyon is 7% (0.07).
+2. Your investments yield an annual return of 4% (0.04).
+3. The down payment is 25% (0.25) of the cost of the house, which is €1,000,000.
+Your goal is to find the savings rate that gets you close to the down payment amount
+within €100.
+Write a program in Python to calculate the best savings rate as a function of your starting
+salary in Lyon. Implement bisection search to find this rate efficiently. Keep track of the
+number of steps it takes for your bisection search to finish.
+Your program should prompt the user to enter the starting annual salary in Lyon and
+provide the best savings rate, rounded to four decimal places. If it’s not possible to save
+for the down payment in 36 months, your program should display a message notifying
+the user.
+Make sure that your code adheres to the format shown in the test cases provided.
+Test case 1
+Enter the starting salary in Lyon: 50000
+Best savings rate: 0.2278
+Steps in bisection search: 11
+3
+Test case 2
+Enter the starting salary in Lyon: 90000
+Best savings rate: 0.1743
+Steps in bisection search: 12
+Test case 3
+Enter the starting salary in Lyon: 35000
+It is not possible to pay the down payment in three years.
+4

@@ -27,5 +27,5 @@ def months4house():
     print(f"Number of months : {nb_months}")
 
 
-    if __name__ == "__main__":
-        months4house()
+if __name__ == "__main__":
+    months4house()

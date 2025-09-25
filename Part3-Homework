@@ -5,7 +5,7 @@ Homework 1 : Dream House in Lyon
 Part III : Bisection search to find the right savings rate'''
 
 # For this part i will need to remake the function from part 2 to be able to calculate the total savings from an certain saving rate
-
+# The reason there is a lot of "# type : ignore" is to ignore type precision errors that don't affect the code (aesthetically it is important for me)
 
 def Calculate_savings(annual_salary: float, saving_rate: float, semi_annual_raise: float, r: float):  # 4 parameters
     current_savings = 0.0
@@ -22,7 +22,7 @@ def Calculate_savings(annual_salary: float, saving_rate: float, semi_annual_rais
 
 def Bisection_search(t: tuple, count: int, annual_salary: float, semi_annual_raise: float, r: float):  # type: ignore
     saving_rate: float = (t[0]+t[1]) / 2  # type: ignore #type : ignore
-    if abs(Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) - 1000000) < 100:  # type: ignore
+    if abs(1000000 - Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r)) < 100:  # type: ignore
         return saving_rate, count+1  # type: ignore
     if Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) > 1000000:
         return Bisection_search((t[0], saving_rate), count + 1, annual_salary, semi_annual_raise, r)
@@ -42,12 +42,11 @@ def PartIII():
     if Calculate_savings(Salary, 1.0, semi_annual_raise, r) < 1000000:
         print("Sorry , you do not have the minimum salary required to save up in 3 years ")
         return
-    saving_rate, count = Bisection_search(
-        (0, 1), 0, Salary, semi_annual_raise, r)
+    saving_rate, count = Bisection_search((0, 1), 0, Salary, semi_annual_raise, r) # type: ignore
     print(f"Best saving rate : {saving_rate}")
     print(f"Steps in bisection Search : {count}")
 
 
 if __name__ == "__main__":
-    # Calculate_savings(50000, 0.10, 0.07, 0.4)
+    # print(Calculate_savings(50000, 0.10, 0.07, 0.4))
     PartIII()
