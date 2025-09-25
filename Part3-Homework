@@ -7,6 +7,7 @@ Part III : Bisection search to find the right savings rate'''
 # For this part i will need to remake the function from part 2 to be able to calculate the total savings from an certain saving rate
 # The reason there is a lot of "# type : ignore" is to ignore type precision errors that don't affect the code (aesthetically it is important for me)
 
+
 def Calculate_savings(annual_salary: float, saving_rate: float, semi_annual_raise: float, r: float):  # 4 parameters
     current_savings = 0.0
     r_montly: float = ((1+r)**(1/12))-1
@@ -19,18 +20,38 @@ def Calculate_savings(annual_salary: float, saving_rate: float, semi_annual_rais
 
 # Now i need to perform the bisection search to see the best savings rate for buying a house
 
-
 def Bisection_search(t: tuple, count: int, annual_salary: float, semi_annual_raise: float, r: float):  # type: ignore
     saving_rate: float = (t[0]+t[1]) / 2  # type: ignore #type : ignore
     if abs(1000000 - Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r)) < 100:  # type: ignore
         return saving_rate, count+1  # type: ignore
-    if Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) > 1000000:
-        return Bisection_search((t[0], saving_rate), count + 1, annual_salary, semi_annual_raise, r)
-    if Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) < 1000000:
-        return Bisection_search((saving_rate, t[1]), count + 1, annual_salary, semi_annual_raise, r)
+    if Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) > 1000000: # type: ignore
+        return Bisection_search((t[0], saving_rate), count + 1, annual_salary, semi_annual_raise, r) # type: ignore
+    if Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r) < 1000000: # type: ignore
+        return Bisection_search((saving_rate, t[1]), count + 1, annual_salary, semi_annual_raise, r) # type: ignore
+
+#i realised that using a recursive function for this is overkill so i made an iterative version 
+def Bisection_search_it(annual_salary: float, semi_annual_raise: float, r: float):
+    left : float = 0.0
+    right : float = 1.0
+    steps : int = 0
+    while True: 
+        saving_rate = (left+right) /2
+        Savings : float  = Calculate_savings(annual_salary, saving_rate, semi_annual_raise, r)
+        if abs(Savings - 1000000) < 100:
+            return saving_rate, steps 
+        if Savings > 1000000:
+            right = saving_rate
+        else : 
+            left = saving_rate
+        steps += 1 
+        if steps > 100: #if this happens then there is definitly an infinite loop
+            break
+    return None, steps 
+
+
+
 
 # Now i do the final function with all the user inputs
-
 
 def PartIII():
     # Given inputs :
@@ -42,11 +63,15 @@ def PartIII():
     if Calculate_savings(Salary, 1.0, semi_annual_raise, r) < 1000000:
         print("Sorry , you do not have the minimum salary required to save up in 3 years ")
         return
-    saving_rate, count = Bisection_search((0, 1), 0, Salary, semi_annual_raise, r) # type: ignore
+    #saving_rate, count = Bisection_search((0, 1), 0, Salary, semi_annual_raise, r) # type: ignore
+    saving_rate , count = Bisection_search_it(Salary, semi_annual_raise, r)
     print(f"Best saving rate : {saving_rate}")
     print(f"Steps in bisection Search : {count}")
+
 
 
 if __name__ == "__main__":
     # print(Calculate_savings(50000, 0.10, 0.07, 0.4))
     PartIII()
+
+
